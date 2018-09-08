@@ -7,24 +7,15 @@ jobs:
     working_directory: /app
     steps:
       - checkout
+      - setup_remote_docker
       - run: go get -v -t -d ./...
-      - run: go test -v ./...
-
-  deploy:
-    steps:
-      - checkout
       - run:
-          name: Deploy Master to Docker Hub
-          command: $DOCKER_HUB_TRIGGER
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
+          name: Run tests 
+          command: |
+            go test -v ./...
       - deploy:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
+          name: Publish application to docker hub
+          command: |
+            docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
+            docker tag helloworld $DOCKER_HUB_USER_ID/helloworld:latest
+            docker push $DOCKER_HUB_USER_ID/helloworld:latest
