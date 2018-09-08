@@ -15,7 +15,6 @@ jobs:
             go test -v ./...
       - deploy:
           name: Publish application to docker hub
+          branch: master
           command: |
-            docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
-            docker tag helloworld $DOCKER_HUB_USER_ID/helloworld:latest
-            docker push $DOCKER_HUB_USER_ID/helloworld:latest
+            curl -H "Content-Type:application/json" -X POST https://registry.hub.docker.com/u/snowstormkitten/helloworld/trigger/cef07b88-b290-43be-ba26-cd76075609e7/
