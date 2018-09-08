@@ -7,11 +7,24 @@ jobs:
     working_directory: /app
     steps:
       - checkout
-
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-deployment:
-    dockerhub:
-      branch: master
-      commands:
-        - $DOCKER_HUB_TRIGGER
+
+  deploy:
+    steps:
+      - checkout
+      - run:
+        name: Deploy Master to Docker Hub
+        command: curl --request POST --header Content-Type:application/json --data {"build":true} --url https://registry.hub.docker.com/u/snowstormkitten/helloworld/trigger/cef07b88-b290-43be-ba26-cd76075609e7/
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+        requires:
+          - build
+          filters:
+            branches:
+              only: master
