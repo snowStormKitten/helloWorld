@@ -10,3 +10,7 @@ jobs:
 
       - run: go get -v -t -d ./...
       - run: go test -v ./...
+      - deploy:
+        branch: master
+        commands:
+          - $DOCKER_HUB_TRIGGER
