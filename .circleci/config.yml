@@ -15,7 +15,7 @@ jobs:
       - checkout
       - run:
           name: Deploy Master to Docker Hub
-          command: curl --request POST --header Content-Type:application/json --data {"build":true} --url https://registry.hub.docker.com/u/snowstormkitten/helloworld/trigger/cef07b88-b290-43be-ba26-cd76075609e7/
+          command: curl -H "Content-Type: application/json" --data {"build": true} -X POST https://registry.hub.docker.com/u/snowstormkitten/helloworld/trigger/cef07b88-b290-43be-ba26-cd76075609e7/
 
 workflows:
   version: 2
