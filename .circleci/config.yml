@@ -7,7 +7,6 @@ jobs:
     working_directory: /app
     steps:
       - checkout
-      - run: go get -v -t -d ./...
       - run:
           name: Run tests 
           command: |
