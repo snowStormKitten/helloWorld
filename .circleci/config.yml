@@ -16,7 +16,7 @@ jobs:
       - image: goland:latest
     working_directory: /app
     steps:
-      - deploy:
+      - run:
           name: Run if test pass and branch is Master
           command: |
             curl -H "Content-Type:application/json" -X POST https://registry.hub.docker.com/u/snowstormkitten/helloworld/trigger/cef07b88-b290-43be-ba26-cd76075609e7/
