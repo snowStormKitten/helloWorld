@@ -11,7 +11,7 @@ jobs:
           name: Run tests 
           command: |
             go test -v ./...
-  deployment:
+  deploy:
     docker:
       - image: goland:latest
     working_directory: /app
@@ -26,6 +26,9 @@ workflows:
     build-deploy:
       jobs:
         - build
-        - deployment:
-          requires:
-            - build
+        - deploy:
+            requires:
+              - build
+            filters:
+              branches:
+                only: master
