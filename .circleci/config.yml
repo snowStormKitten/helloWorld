@@ -12,9 +12,6 @@ jobs:
           command: |
             go test -v ./...
   deploy:
-    docker:
-      - image: goland:latest
-    working_directory: /app
     steps:
       - run:
           name: Run if test pass and branch is Master
