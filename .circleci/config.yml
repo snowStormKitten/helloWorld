@@ -16,7 +16,6 @@ jobs:
       - image: golang:latest
     working_directory: /app
     steps:
-      - checkout
       - run:
           name: Run if test pass and branch is Master
           command: |
