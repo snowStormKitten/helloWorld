@@ -14,8 +14,8 @@ func handler(w http.ResponseWriter, r *http.Request){
 		Title string
 		Text string
 	}{
-		Title: "Hello World!",
-		Text: "Hello World",
+		Title: "Demo Page!",
+		Text: "Demo Text!!!",
 	}
 
 	t.Execute(w, data)
