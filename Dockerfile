@@ -1,8 +1,8 @@
 FROM golang:latest
 
-RUN mkdir /app
-ADD . /app/
-WORKDIR /app
+RUN mkdir /test
+ADD . /test/
+WORKDIR /test
 RUN go build -o helloWorld .
 
-CMD ["/app/helloWorld"]
+CMD ["/test/helloWorld"]
